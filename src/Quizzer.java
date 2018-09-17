@@ -21,7 +21,8 @@ public class Quizzer
     public static void main(String[] args)
     {
         boolean isPlaying = true;
-        int maxTime = 30;
+        System.out.println("Please enter a time limit: ");
+        int maxTime = Integer.parseInt(System.console().readLine());
         long timeRemaining = System.currentTimeMillis() + (maxTime * 1000);
         int indexPointer = 0;
 

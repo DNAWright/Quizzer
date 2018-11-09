@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Quizzer
 {
     public static String[] SHORT_NAMES =
@@ -24,29 +26,32 @@ public class Quizzer
         System.out.println("Please enter a time limit: ");
         int maxTime = Integer.parseInt(System.console().readLine());
         long timeRemaining = System.currentTimeMillis() + (maxTime * 1000);
-        int indexPointer = 0;
+        int points = 0;
 
         while(isPlaying==true)
         {
+            Random rand = new Random();
+            int indexPointer = rand.nextInt(20);
+
             System.out.println("Enter Symbol for Amino Acid: " + FULL_NAMES[indexPointer]);
             String aString = System.console().readLine().toUpperCase();
             String aChar = "" + aString.charAt(0);
             if(System.currentTimeMillis() >= timeRemaining)
             {
-                System.out.println("Time is up!");
+                System.out.println("You're too slow!");
                 isPlaying = false;
             }
             else if(aChar.equals(SHORT_NAMES[indexPointer]))
             {
-                indexPointer++;
                 System.out.println("Correct!");
+                points++;
             }
             else
             {
-                System.out.println("Incorrect.");
+                System.out.println("Incorrect. The symbol for " + FULL_NAMES[indexPointer] + " is " + SHORT_NAMES[indexPointer]);
                 isPlaying = false;
             }
-            System.out.println("Total Score: " + indexPointer);
+            System.out.println("Total Score: " + points);
             System.out.println("Time Remaining: " + ((timeRemaining/1000) - (System.currentTimeMillis()/1000)));
         }
     }
